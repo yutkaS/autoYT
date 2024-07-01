@@ -60,12 +60,14 @@ function checkForNewShort() {
     document.querySelectorAll(VIDEOS_LIST_SELECTOR)
   ).findIndex((e) => e.hasAttribute("is-active"));
   if (scrollingIsDone /*to prevent double scrolls*/) {
+
     if (newCurrentShortsIndex !== currentVideoIndex) {
       lastVideo?.removeEventListener("ended", videoFinished);
       lastVideo = currentVideo;
       currentVideoIndex = newCurrentShortsIndex;
     }
     currentVideo.addEventListener("ended", videoFinished);
+
   }
 }
 function videoFinished() {
@@ -101,14 +103,9 @@ async function scrollToNextShort() {
   );
   if (!nextVideoParent) return;
   const nextBtn = document.querySelector('[aria-label="Следующее видео"]');
-  nextBtn.click()
-  // nextVideoParent?.scrollIntoView({
-  //   behavior: "smooth",
-  //   block: "center",
-  //   inline: "center",
-  // });
   const likeBtn = document.querySelector(LIKE_BUTTON_SELECTOR);
-  likeBtn.click();
+  nextBtn.click()
+  likeBtn && likeBtn.click();
 
   setTimeout(() => {
     // Hardcoded timeout to make sure the video is scrolled before other scrolls are allowed
