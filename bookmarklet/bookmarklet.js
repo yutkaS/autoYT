@@ -100,7 +100,7 @@ async function scrollToNextShort() {
     `${Number(currentVideoParent?.id) + 1}`
   );
   if (!nextVideoParent) return;
-  const nextBtn = document.querySelectorAll('[aria-label="Message Body"]');
+  const nextBtn = document.querySelector('[aria-label="Следующее видео"]');
   nextBtn.click()
   // nextVideoParent?.scrollIntoView({
   //   behavior: "smooth",
