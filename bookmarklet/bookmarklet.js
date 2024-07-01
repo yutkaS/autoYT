@@ -60,6 +60,8 @@ function checkForNewShort() {
     document.querySelectorAll(VIDEOS_LIST_SELECTOR)
   ).findIndex((e) => e.hasAttribute("is-active"));
   if (scrollingIsDone /*to prevent double scrolls*/) {
+    const likeBtn = document.querySelector(LIKE_BUTTON_SELECTOR);
+    likeBtn.click();
     if (newCurrentShortsIndex !== currentVideoIndex) {
       lastVideo?.removeEventListener("ended", videoFinished);
       lastVideo = currentVideo;
@@ -169,16 +171,7 @@ function shortCutListener() {
       }
     } else if (await checkKeys(shortCutInteractKeys, false)) {
       // Shortcut for like/dislike
-      const likeBtn = document.querySelector(LIKE_BUTTON_SELECTOR);
-      const dislikeBtn = document.querySelector(DISLIKE_BUTTON_SELECTOR);
-      if (
-        likeBtn?.getAttribute("aria-pressed") === "true" ||
-        dislikeBtn?.getAttribute("aria-pressed") === "true"
-      ) {
-        dislikeBtn.click();
-      } else {
-        likeBtn.click();
-      }
+      // const dislikeBtn = document.querySelector(DISLIKE_BUTTON_SELECTOR);
     } else if (await checkKeys(shortCutScrollOnCommentsKeys, false)) {
       if (scrollOnComments) {
         scrollOnComments = false;
