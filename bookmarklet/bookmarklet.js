@@ -110,26 +110,28 @@ async function scrollToNextShort() {
     const nextBtn = document.querySelector('[aria-label="Следующее видео"]');
     const likeBtn = document.querySelector(LIKE_BUTTON_SELECTOR);
     const commentsBtn = document.querySelectorAll('#comments-button > ytd-button-renderer > yt-button-shape > label > button > yt-touch-feedback-shape > div > div.yt-spec-touch-feedback-shape__fill')
+    console.log(commentsBtn[counter]);
     commentsBtn[counter].click();
     await sleep(1000);
     const placeHolder = document.querySelector('#placeholder-area');
     placeHolder.click();
+
     await sleep(1000);
     const commentInput = document.querySelector('#contenteditable-root');
     const commentButton = document.querySelector('#submit-button');
 
-        commentInput.innerText = commentsArr[0];
+    commentInput.innerText = commentsArr[0];
     await sleep(1000);
     commentButton.click();
-        likeBtn && likeBtn.click();
-
-
-        nextBtn.click()
-        counter++
-        setTimeout(() => {
-            // Hardcoded timeout to make sure the video is scrolled before other scrolls are allowed
-            scrollingIsDone = true;
-        }, 700);
+    await sleep(1000);
+    likeBtn && likeBtn.click();
+    await sleep(1000);
+    nextBtn.click()
+    counter++
+    setTimeout(() => {
+        // Hardcoded timeout to make sure the video is scrolled before other scrolls are allowed
+        scrollingIsDone = true;
+        },700);
 }
 
 function getParentVideo() {
