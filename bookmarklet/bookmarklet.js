@@ -60,8 +60,6 @@ function checkForNewShort() {
     document.querySelectorAll(VIDEOS_LIST_SELECTOR)
   ).findIndex((e) => e.hasAttribute("is-active"));
   if (scrollingIsDone /*to prevent double scrolls*/) {
-    const likeBtn = document.querySelector(LIKE_BUTTON_SELECTOR);
-    likeBtn.click();
     if (newCurrentShortsIndex !== currentVideoIndex) {
       lastVideo?.removeEventListener("ended", videoFinished);
       lastVideo = currentVideo;
@@ -107,6 +105,9 @@ async function scrollToNextShort() {
     block: "center",
     inline: "center",
   });
+  const likeBtn = document.querySelector(LIKE_BUTTON_SELECTOR);
+  likeBtn.click();
+
   setTimeout(() => {
     // Hardcoded timeout to make sure the video is scrolled before other scrolls are allowed
     scrollingIsDone = true;
