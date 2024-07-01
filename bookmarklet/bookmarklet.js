@@ -107,9 +107,9 @@ async function scrollToNextShort() {
   const nextBtn = document.querySelector('[aria-label="Следующее видео"]');
   const likeBtn = document.querySelector(LIKE_BUTTON_SELECTOR);
   const commentsBtn = document.querySelectorAll('#comments-button > ytd-button-renderer > yt-button-shape > label > button > yt-touch-feedback-shape > div > div.yt-spec-touch-feedback-shape__fill')
-  const comments = document.querySelector('#contenteditable-root');
-  comments.innerText = commentsArr[0];
-  console.log(comments, commentsBtn, counter);
+  // const comments = document.querySelector('#contenteditable-root');
+  // comments.innerText = commentsArr[0];
+  console.log(commentsBtn, counter);
   likeBtn && likeBtn.click();
 
   nextBtn.click()
