@@ -51,7 +51,6 @@ function checkForNewShort() {
   const currentVideo = document.querySelector(
     "#shorts-container video[tabindex='-1']"
   );
-  console.log(currentVideo);
   // Check to see if the video has loaded
   if (isNaN(currentVideo?.duration) || currentVideo?.duration == null) return;
   // Checks if the appliaction is on. If not, lets the video loop again
