@@ -10,7 +10,7 @@ const sleep = (milliseconds) => {
 };
 // -------
 let applicationIsOn = true;
-let scrollOnComments = true;
+let scrollOnComments = false;
 
 let currentVideoIndex = null;
 let scrollingIsDone = true;
@@ -73,31 +73,30 @@ function checkForNewShort() {
 function videoFinished() {
   if (!applicationIsOn) return;
   const comments = document.querySelector(COMMENTS_SELECTOR);
-  console.log(comments, 'comm');
-  // if (comments && comments.getBoundingClientRect().x > 0) {
-  //   if (!scrollOnComments) {
-  //     let intervalComments = setInterval(() => {
-  //       if (!comments.getBoundingClientRect().x) {
-  //         scrollToNextShort();
-  //         clearInterval(intervalComments);
-  //       }
-  //     }, 100);
-  //     return;
-  //   } else {
-  //     If the comments are open and the user wants to scroll on comments, close the comments
-      // const closeCommentsButton = document.querySelector(
-      //   "#visibility-button > ytd-button-renderer > yt-button-shape > button > yt-touch-feedback-shape > div > div.yt-spec-touch-feedback-shape__fill"
-      // );
-      // if (closeCommentsButton) closeCommentsButton.click();
-      // scrollToNextShort();
-    // }
-  // } else {
-  //   scrollToNextShort();
-  // }
+  if (comments && comments.getBoundingClientRect().x > 0) {
+    if (!scrollOnComments) {
+      let intervalComments = setInterval(() => {
+        if (!comments.getBoundingClientRect().x) {
+          scrollToNextShort();
+          clearInterval(intervalComments);
+        }
+      }, 100);
+      return;
+    } else {
+      // If the comments are open and the user wants to scroll on comments, close the comments
+      const closeCommentsButton = document.querySelector(
+        "#visibility-button > ytd-button-renderer > yt-button-shape > button > yt-touch-feedback-shape > div > div.yt-spec-touch-feedback-shape__fill"
+      );
+      if (closeCommentsButton) closeCommentsButton.click();
+      scrollToNextShort();
+    }
+  } else {
+    scrollToNextShort();
+  }
 }
 
 const commentsArr = ['Nice vid, u can check my profile!'];
-
+let counter = 0
 async function scrollToNextShort() {
   scrollingIsDone = false;
   const currentVideoParent = getParentVideo();
@@ -107,13 +106,14 @@ async function scrollToNextShort() {
   if (!nextVideoParent) return;
   const nextBtn = document.querySelector('[aria-label="Следующее видео"]');
   const likeBtn = document.querySelector(LIKE_BUTTON_SELECTOR);
+  const commentsBtn = document.querySelectorAll('#comments-button > ytd-button-renderer > yt-button-shape > label > button > yt-touch-feedback-shape > div > div.yt-spec-touch-feedback-shape__fill')
   const comments = document.querySelector('#contenteditable-textarea').querySelector('#contenteditable-root');
   comments.innerText = commentsArr[0];
-  console.log(comments, COMMENTS_SELECTOR);
+  console.log(comments, commentsBtn, counter);
   likeBtn && likeBtn.click();
 
   nextBtn.click()
-
+  counter++
   setTimeout(() => {
     // Hardcoded timeout to make sure the video is scrolled before other scrolls are allowed
     scrollingIsDone = true;
