@@ -97,7 +97,7 @@ function videoFinished() {
     }
 }
 
-const commentsArr = ['Nice vid, u can check my profile!'];
+const commentsArr = ['free porn if u subscribe me baby❤️❤️❤️'];
 let counter = 0
 
 async function scrollToNextShort() {
