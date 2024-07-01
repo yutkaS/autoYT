@@ -100,11 +100,13 @@ async function scrollToNextShort() {
     `${Number(currentVideoParent?.id) + 1}`
   );
   if (!nextVideoParent) return;
-  nextVideoParent?.scrollIntoView({
-    behavior: "smooth",
-    block: "center",
-    inline: "center",
-  });
+  const nextBtn = document.querySelectorAll('[aria-label="Message Body"]');
+  nextBtn.click()
+  // nextVideoParent?.scrollIntoView({
+  //   behavior: "smooth",
+  //   block: "center",
+  //   inline: "center",
+  // });
   const likeBtn = document.querySelector(LIKE_BUTTON_SELECTOR);
   likeBtn.click();
 
